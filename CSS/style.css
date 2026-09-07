@@ -791,7 +791,7 @@ margin-bottom: 40px;
         left: 354px;
     }
 }
-@media (min-width:320px) and (max-width:400px)    
+@media (min-width:320px) and (max-width:359px)    
 {
     .contact .container .ti{
         display: flex;
@@ -810,6 +810,6 @@ margin-bottom: 40px;
         position: absolute;
     }
     .aside .nav-toggler.open{
-        left: 350px;
+        left: 310px;
     }
 }
