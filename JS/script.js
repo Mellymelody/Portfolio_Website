@@ -10,7 +10,7 @@ const nav = document.querySelector(".nav"),
       navList = nav.querySelectorAll("li"),
       totalNavList = navList.length,
       allSection = document.querySelectorAll(".section"),
-      tototalSection = allSection.length;
+      totalSection = allSection.length;
       for(let i=0; i<totalNavList; i++)
       {
           const a = navList[i].querySelector("a");
@@ -34,23 +34,23 @@ const nav = document.querySelector(".nav"),
             }
           })
       }
-      function removeBackSection()
-      {
-        for(let i=0; i<tototalSection; i++)
-        {
-            allSection[i].classList.remove("back-section");
-        }
-      }
-      function addBackSection(num)
-      {
-        allSection[num].classList.add("back-section");
-      }
-      function showSection(element)
-      {
-          for(let i=0; i<tototalSection; i++)
-          {
-              allSection[i].classList.remove("active");
-          }
+function removeBackSection()
+{
+  for(let i=0; i<totalSection; i++)
+  {
+      allSection[i].classList.remove("back-section");
+  }
+}
+function addBackSection(num)
+{
+  allSection[num].classList.add("back-section");
+}
+function showSection(element)
+{
+    for(let i=0; i<totalSection; i++)
+    {
+        allSection[i].classList.remove("active");
+    }
           const target = element.getAttribute("href").split("#")[1];
           document.querySelector("#" + target).classList.add("active")
       }
@@ -66,11 +66,11 @@ const nav = document.querySelector(".nav"),
               }
           }
       }
-      document.querySelector(".hire-me").addEventListener("click", function()
-      {
-        const sectionIndex = this.getAttribute("data-section-index");
-        // console.log(sectionIndex;)
-        showSection(this);
+document.querySelector(".hire-me").addEventListener("click", function()
+{
+  const sectionIndex = parseInt(this.getAttribute("data-section-index"));
+  // console.log(sectionIndex);
+  showSection(this);
         updateNav(this);
         removeBackSection();
         addBackSection(sectionIndex);
@@ -81,12 +81,12 @@ const nav = document.querySelector(".nav"),
             {
                 asideSectionTogglerBtn();
             })
-            function asideSectionTogglerBtn()
-            {
-                aside.classList.toggle("open");
-                navTogglerBtn.classList.toggle("open");
-                for(let i=0; i<tototalSection; i++ )
-                {
-                    allSection[i].classList.toggle("open")
-                }
-            }
+function asideSectionTogglerBtn()
+{
+    aside.classList.toggle("open");
+    navTogglerBtn.classList.toggle("open");
+    for(let i=0; i<totalSection; i++ )
+    {
+        allSection[i].classList.toggle("open")
+    }
+}
