@@ -440,22 +440,47 @@ margin-top: 10px;
     font-weight: 700;
     color: var(--text-black-900);
 }
-.about .about-content .timeline-box{
+.about .about-content .experience .timeline-box{
     flex: 0 0 100%;
     max-width: 100%;
 }
-.about .about-content .timeline{
+.about .about-content .education .timeline-box{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.about .about-content .education .timeline{
     background-color:var(--bg-black-100);
     padding: 30px 15px;
     border: 1px solid var(--bg-black-50);
     border-radius: 10px;
     width: 100%;
     position: relative;
+    height: 290px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.about .about-content .experience .timeline{
+    background-color:var(--bg-black-100);
+    padding: 30px 15px;
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    width: 100%;
+    height: 290px;
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.about .about-content .experience .timeline::-webkit-scrollbar{
+    display: none;
+}
+.about .about-content .education .timeline::-webkit-scrollbar{
+    display: none;
 }
 .about .about-content .timeline .timeline-item{
     position: relative;
     padding-left: 37px;
     padding-bottom: 50px;
+    overflow-y: hidden;
 }
 .about .about-content .timeline .timeline-item:last-child{
     padding-bottom: 0;
@@ -720,6 +745,9 @@ margin-bottom: 40px;
     {
         flex: 0 0 100%;
         max-width: 100%;
+    }
+    .about .about-content .timeline .timeline-text{
+        text-align: unset;
     }
     .aside .nav-toggler.open{
         left: 260px;
