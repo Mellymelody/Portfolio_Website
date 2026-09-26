@@ -418,7 +418,11 @@
                 <!-- ======== Contact form ========= -->
                 <div class="row">
                     <div class="contact-form padd-15">
-                        <form action="#" method="POST">
+                        <form action="#" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <input type="hidden" name="form-name" value="contact">
+                            <div style="display: none;" aria-hidden="true">
+                                <label>Don't fill this out: <input type="text" name="bot-field"></label>
+                            </div>
                             <div class="row">
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
