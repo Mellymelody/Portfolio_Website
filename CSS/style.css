@@ -627,7 +627,7 @@ margin-bottom: 40px;
     max-width: 29.3%;
     text-align: center;
     margin-bottom: 60px;
-    /* border: 1px solid rgb(255, 255, 255); */
+    /* border: 1px solid rgb(0, 0, 0); */
 }
 .contact .contact-info-item .icon{
     display: inline-block;
@@ -652,6 +652,7 @@ margin-bottom: 40px;
 .contact .contact-form{
     flex: 0 0 100%;
     max-width: 100%;
+    /* border: 1px solid black; */
 }
 .contact .contact-form .col-6{
     flex: 0 0 50%;
@@ -824,6 +825,8 @@ margin-bottom: 40px;
     .contact .container .ti{
         display: flex;
         /* flex-direction: column; */
+        /* gap: 11px; */
+        justify-content: center;
         gap: 11px;
     }
     .contact .contact-info-item
@@ -840,5 +843,10 @@ margin-bottom: 40px;
     .aside .nav-toggler.open{
         left: 300px;
         /* display: none; */
+    }
+    .contact .contact-info-item{
+        flex: 0 0 36.3%;
+        max-width: 39.3%;
+        /* border: 1px solid black; */
     }
 }
