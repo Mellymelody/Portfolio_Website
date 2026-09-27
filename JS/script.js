@@ -90,3 +90,63 @@ function asideSectionTogglerBtn()
         allSection[i].classList.toggle("open")
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const messageDiv = document.getElementById('form-message');
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      messageDiv.style.display = 'none';
+      messageDiv.className = 'form-message';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      try {
+        const response = await fetch('/.netlify/functions/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          messageDiv.textContent = result.message || 'Message sent successfully!';
+          messageDiv.style.background = '#d4edda';
+          messageDiv.style.color = '#155724';
+          messageDiv.style.border = '1px solid #c3e6cb';
+          messageDiv.style.padding = '12px';
+          messageDiv.style.borderRadius = '5px';
+          form.reset();
+        } else {
+          messageDiv.textContent = result.errors ? result.errors.join(', ') : 'Something went wrong. Please try again.';
+          messageDiv.style.background = '#f8d7da';
+          messageDiv.style.color = '#721c24';
+          messageDiv.style.border = '1px solid #f5c6cb';
+          messageDiv.style.padding = '12px';
+          messageDiv.style.borderRadius = '5px';
+        }
+      } catch (err) {
+        messageDiv.textContent = 'Network error. Please check your connection and try again.';
+        messageDiv.style.background = '#f8d7da';
+        messageDiv.style.color = '#721c24';
+        messageDiv.style.border = '1px solid #f5c6cb';
+        messageDiv.style.padding = '12px';
+        messageDiv.style.borderRadius = '5px';
+      }
+
+      messageDiv.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    });
+  }
+});
