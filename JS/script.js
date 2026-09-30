@@ -81,19 +81,6 @@ function asideSectionTogglerBtn() {
     }
 }
 
-windows.addEventListener("beforeunload", ()=> {
-    sessionStorage.setItem("scrollPosition", window.scrollY);
-});
-
-windows.addEventListener("load", ()=> {
-    const position = sessionStorage.getItem("scrollPosition");
-
-    if (position !== null) {
-        window.scrollTo(0, Number(position));
-        sessionStorage.removeItem("scrollPosition");
-    }
-});
-
 function showSectionByIndex(index) {
     const sections = document.querySelectorAll(".section");
     for(let i=0; i<sections.length; i++) {
