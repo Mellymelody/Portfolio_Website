@@ -94,7 +94,18 @@ function asideSectionTogglerBtn()
     }
 }
 
+function ensureAsideClosed() {
+    if (window.innerWidth <= 1199) {
+        aside.classList.remove("open");
+        navTogglerBtn.classList.remove("open");
+        for(let i=0; i<totalSection; i++) {
+            allSection[i].classList.remove("open");
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    ensureAsideClosed();
   const form = document.getElementById('contact-form');
   const messageDiv = document.getElementById('form-message');
 
