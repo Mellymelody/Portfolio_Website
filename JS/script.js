@@ -6,34 +6,35 @@ var typed = new Typed(".typing",{
     loop:true
 })
 /* ===================================== Aside ======================================== */
-const nav = document.querySelector(".nav"),
-      navList = nav.querySelectorAll("li"),
-      totalNavList = navList.length,
-      allSection = document.querySelectorAll(".section"),
-      totalSection = allSection.length;
-      for(let i=0; i<totalNavList; i++)
-      {
-          const a = navList[i].querySelector("a");
-          a.addEventListener("click", function()
+const nav = document.querySelector(".nav");
+if (nav) {
+    const navList = nav.querySelectorAll("li"),
+          totalNavList = navList.length,
+          allSection = document.querySelectorAll(".section"),
+          totalSection = allSection.length;
+    for(let i=0; i<totalNavList; i++)
+    {
+        const a = navList[i].querySelector("a");
+        a.addEventListener("click", function()
+        {
+          removeBackSection();
+          for(let j=0; j<totalNavList; j++)
           {
-            removeBackSection();
-            for(let j=0; j<totalNavList; j++)
-            {
-                if(navList[j].querySelector("a").classList.contains("active"))
-                {
-                    addBackSection(j);
-                    // allSection[j].classList.add("back-section");
-                }
-                navList[j].querySelector("a").classList.remove("active");
-            }
-            this.classList.add("active")
-            showSection(this);
-            if(window.innerWidth < 1200)
-            {
-                asideSectionTogglerBtn();
-            }
-          })
-      }
+              if(navList[j].querySelector("a").classList.contains("active"))
+              {
+                  addBackSection(j);
+              }
+              navList[j].querySelector("a").classList.remove("active");
+          }
+          this.classList.add("active")
+          showSection(this);
+          if(window.innerWidth < 1200)
+          {
+              asideSectionTogglerBtn();
+          }
+        })
+    }
+}
 function removeBackSection()
 {
   for(let i=0; i<totalSection; i++)
@@ -71,35 +72,41 @@ if (hireMeBtn) {
   hireMeBtn.addEventListener("click", function()
   {
     const sectionIndex = parseInt(this.getAttribute("data-section-index"));
-    // console.log(sectionIndex);
     showSection(this);
     updateNav(this);
     removeBackSection();
     addBackSection(sectionIndex);
   })
 }
-      const navTogglerBtn = document.querySelector(".nav-toggler"),
-            aside = document.querySelector(".aside");
-            navTogglerBtn.addEventListener("click", () => 
-            {
-                asideSectionTogglerBtn();
-            })
+
+const navTogglerBtn = document.querySelector(".nav-toggler"),
+      aside = document.querySelector(".aside");
+if (navTogglerBtn && aside) {
+    navTogglerBtn.addEventListener("click", () => {
+        asideSectionTogglerBtn();
+    })
+}
+
 function asideSectionTogglerBtn()
 {
     aside.classList.toggle("open");
     navTogglerBtn.classList.toggle("open");
-    for(let i=0; i<totalSection; i++ )
+    const allSections = document.querySelectorAll(".section");
+    for(let i=0; i<allSections.length; i++ )
     {
-        allSection[i].classList.toggle("open")
+        allSections[i].classList.toggle("open")
     }
 }
 
 function ensureAsideClosed() {
     if (window.innerWidth <= 1199) {
-        aside.classList.remove("open");
-        navTogglerBtn.classList.remove("open");
-        for(let i=0; i<totalSection; i++) {
-            allSection[i].classList.remove("open");
+        const aside = document.querySelector(".aside");
+        const navTogglerBtn = document.querySelector(".nav-toggler");
+        const allSections = document.querySelectorAll(".section");
+        if (aside) aside.classList.remove("open");
+        if (navTogglerBtn) navTogglerBtn.classList.remove("open");
+        for(let i=0; i<allSections.length; i++) {
+            allSections[i].classList.remove("open");
         }
     }
 }
