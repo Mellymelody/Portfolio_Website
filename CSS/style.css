@@ -741,6 +741,97 @@ margin-top: 10px;
     color: white !important;
 }
 
+@media (max-width: 991px) {
+    .service-detail-img {
+        margin-bottom: 30px;
+    }
+    .service-detail-info h3 {
+        font-size: 22px;
+    }
+    .step-number {
+        width: 45px;
+        height: 45px;
+        font-size: 14px;
+        margin-right: 15px;
+    }
+    .step-content h5 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .service-detail .section-title {
+        margin-bottom: 30px;
+    }
+    .service-detail-info h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .service-detail-info p {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+    .service-detail-info h4 {
+        font-size: 18px;
+        margin: 25px 0 12px;
+    }
+    .service-features li {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .process-step {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .step-number {
+        margin-bottom: 12px;
+        margin-right: 0;
+    }
+    .step-content {
+        padding-top: 0;
+    }
+    .tech-tag {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+    .service-cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .service-cta .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-detail-img {
+        margin-bottom: 25px;
+        border-radius: 8px;
+    }
+    .service-detail-info h3 {
+        font-size: 18px;
+    }
+    .service-detail-info p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+    .service-features li {
+        font-size: 14px;
+    }
+    .service-features li i {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+    .tech-stack {
+        gap: 8px;
+    }
+    .tech-tag {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+}
+
 /* Portfolio */
 .portfolio .container{
     padding-bottom: 40px;
