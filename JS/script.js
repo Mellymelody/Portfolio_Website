@@ -66,15 +66,18 @@ function showSection(element)
               }
           }
       }
-document.querySelector(".hire-me").addEventListener("click", function()
-{
-  const sectionIndex = parseInt(this.getAttribute("data-section-index"));
-  // console.log(sectionIndex);
-  showSection(this);
-        updateNav(this);
-        removeBackSection();
-        addBackSection(sectionIndex);
-      })
+const hireMeBtn = document.querySelector(".hire-me");
+if (hireMeBtn) {
+  hireMeBtn.addEventListener("click", function()
+  {
+    const sectionIndex = parseInt(this.getAttribute("data-section-index"));
+    // console.log(sectionIndex);
+    showSection(this);
+    updateNav(this);
+    removeBackSection();
+    addBackSection(sectionIndex);
+  })
+}
       const navTogglerBtn = document.querySelector(".nav-toggler"),
             aside = document.querySelector(".aside");
             navTogglerBtn.addEventListener("click", () => 
