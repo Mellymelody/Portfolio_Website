@@ -91,7 +91,37 @@ function asideSectionTogglerBtn()
     }
 }
 
+function handleHashNavigation() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+        const targetSection = document.querySelector("#" + hash);
+        if (targetSection) {
+            for(let i=0; i<totalSection; i++) {
+                allSection[i].classList.remove("active");
+            }
+            targetSection.classList.add("active");
+            
+            for(let i=0; i<totalNavList; i++) {
+                const navLink = navList[i].querySelector("a");
+                navLink.classList.remove("active");
+                if (navLink.getAttribute("href").split("#")[1] === hash) {
+                    navLink.classList.add("active");
+                }
+            }
+            
+            if (window.innerWidth < 1200) {
+                aside.classList.add("open");
+                navTogglerBtn.classList.add("open");
+                for(let i=0; i<totalSection; i++) {
+                    allSection[i].classList.add("open");
+                }
+            }
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    handleHashNavigation();
   const form = document.getElementById('contact-form');
   const messageDiv = document.getElementById('form-message');
 
