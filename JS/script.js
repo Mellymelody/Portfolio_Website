@@ -17,15 +17,42 @@ if (nav) {
     const totalNavList = navList.length;
     for(let i=0; i<totalNavList; i++) {
         const a = navList[i].querySelector("a");
-        a.addEventListener("click", function() {
-            for(let j=0; j<totalNavList; j++) {
-                navList[j].querySelector("a").classList.remove("active");
-            }
-            this.classList.add("active");
-            if (window.innerWidth < 1200 && aside && navTogglerBtn) {
-                asideSectionTogglerBtn();
+        a.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (href && href.startsWith("#")) {
+                e.preventDefault();
+                const targetId = href.slice(1);
+                showSectionById(targetId);
+                updateNavByHref(href);
+                if (window.innerWidth < 1200 && aside && navTogglerBtn) {
+                    asideSectionTogglerBtn();
+                }
             }
         });
+    }
+}
+
+function showSectionById(id) {
+    const sections = document.querySelectorAll(".section");
+    for(let i=0; i<sections.length; i++) {
+        sections[i].classList.remove("active");
+    }
+    const target = document.getElementById(id);
+    if (target) {
+        target.classList.add("active");
+    }
+}
+
+function updateNavByHref(href) {
+    const nav = document.querySelector(".nav");
+    if (!nav) return;
+    const navList = nav.querySelectorAll("li");
+    for(let i=0; i<navList.length; i++) {
+        const link = navList[i].querySelector("a");
+        link.classList.remove("active");
+        if (link.getAttribute("href") === href) {
+            link.classList.add("active");
+        }
     }
 }
 
@@ -89,8 +116,18 @@ function ensureAsideClosed() {
     }
 }
 
+function handleHashOnLoad() {
+    const hash = window.location.hash;
+    if (hash) {
+        const targetId = hash.slice(1);
+        showSectionById(targetId);
+        updateNavByHref(hash);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     ensureAsideClosed();
+    handleHashOnLoad();
 
     const form = document.getElementById('contact-form');
     const messageDiv = document.getElementById('form-message');
