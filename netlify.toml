@@ -1,9 +1,4 @@
 [build]
   publish = "."
-  command = "echo 'Netlify Forms detection triggered'"
+  command = "npm install"
   functions = "netlify/functions"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

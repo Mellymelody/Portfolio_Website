@@ -2,7 +2,7 @@
 var typed = new Typed(".typing",{
     strings:["","Video Editor","Frontend Web Developer", "Graphic Designer"],
     typeSpeed:100,
-    BackSpeed:60,
+    backSpeed:60,
     loop:true
 })
 
@@ -56,12 +56,27 @@ function updateNavByHref(href) {
     }
 }
 
-const hireMeBtn = document.querySelector(".hire-me");
-if (hireMeBtn) {
-    hireMeBtn.addEventListener("click", function() {
-        const sectionIndex = parseInt(this.getAttribute("data-section-index"));
-        showSectionByIndex(sectionIndex);
-        updateNavByIndex(sectionIndex);
+const hireMeBtns = document.querySelectorAll(".hire-me");
+if (hireMeBtns.length) {
+    hireMeBtns.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            // If it's an in-page anchor to a section, handle it as SPA navigation.
+            if (href && href.startsWith("#")) {
+                e.preventDefault();
+                showSectionById(href.slice(1));
+                updateNavByHref(href);
+            } else {
+                const sectionIndex = parseInt(this.getAttribute("data-section-index"));
+                if (!Number.isNaN(sectionIndex)) {
+                    showSectionByIndex(sectionIndex);
+                    updateNavByIndex(sectionIndex);
+                }
+            }
+            if (window.innerWidth < 1200 && aside && navTogglerBtn) {
+                asideSectionTogglerBtn();
+            }
+        });
     });
 }
 
@@ -128,6 +143,19 @@ function handleHashOnLoad() {
 document.addEventListener('DOMContentLoaded', function() {
     ensureAsideClosed();
     handleHashOnLoad();
+    window.addEventListener('hashchange', handleHashOnLoad);
+
+    // Keep the displayed age correct without yearly manual edits.
+    // Birthday: 29 Aug 2004
+    var ageEl = document.getElementById('age');
+    if (ageEl) {
+        var today = new Date();
+        var age = today.getFullYear() - 2004;
+        var hadBirthday = (today.getMonth() + 1 > 8) ||
+            ((today.getMonth() + 1 === 8) && today.getDate() >= 29);
+        if (!hadBirthday) age -= 1;
+        ageEl.textContent = String(age);
+    }
 
     const form = document.getElementById('contact-form');
     const messageDiv = document.getElementById('form-message');
@@ -165,7 +193,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     messageDiv.style.borderRadius = '5px';
                     form.reset();
                 } else {
-                    messageDiv.textContent = result.errors ? result.errors.join(', ') : 'Something went wrong. Please try again.';
+                    if (response.status === 429) {
+                        messageDiv.textContent = 'Too many messages sent. Please wait a few minutes and try again.';
+                    } else {
+                        messageDiv.textContent = result.errors ? result.errors.join(', ') : 'Something went wrong. Please try again.';
+                    }
                     messageDiv.style.background = '#f8d7da';
                     messageDiv.style.color = '#721c24';
                     messageDiv.style.border = '1px solid #f5c6cb';

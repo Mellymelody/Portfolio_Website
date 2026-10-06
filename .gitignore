@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Env (never commit real keys; .env.example is the template)
+.env
+.env.local
+.env.*.local
+
+# Netlify local state
+.netlify/
+
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db
